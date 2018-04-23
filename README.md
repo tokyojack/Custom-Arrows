@@ -6,7 +6,7 @@
 
 ## Compiling
 
-1. Clone this repo ```git clone https://github.com/tokyojack/CustomArrows```
+1. Clone this repo ```git clone https://github.com/tokyojack/Custom-Arrows```
 2. Add the project to your IDE
 3. Add Lombok and and Spigot/Bukkit .jar to the project 
 4. Edit the plugin to your needs
