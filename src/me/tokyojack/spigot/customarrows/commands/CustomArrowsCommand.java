@@ -10,7 +10,7 @@ import me.tokyojack.spigot.customarrows.utils.kommand.Kommand;
 public class CustomArrowsCommand extends Kommand {
 
 	public CustomArrowsCommand() {
-		super("customarrows", "Custom arrows command", new ArrayList<String>(Arrays.asList("customarrow","ca")));
+		super("customarrows", "Custom arrows command", Arrays.asList("customarrow","ca"));
 	}
 
 	@Override

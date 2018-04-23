@@ -18,15 +18,12 @@ import me.tokyojack.spigot.customarrows.utils.CustomArrow;
 import me.tokyojack.spigot.customarrows.utils.PlayerShootPlayerEvent;
 import me.tokyojack.spigot.customarrows.utils.subkommand.SubKommandManager;
 
+@Getter
 public class Core extends JavaPlugin {
 
+	@Getter
 	private static Core plugin;
 
-	public static Core getPlugin() {
-		return plugin;
-	}
-
-	@Getter
 	private Map<String, CustomArrow> customArrows = new HashMap<String, CustomArrow>();
 
 	public void onEnable() {
@@ -37,9 +34,9 @@ public class Core extends JavaPlugin {
 		new PlayerShootPlayerEvent().registerListener(this);
 
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvents(new ArrowHitPlayer(this), this);
-		pm.registerEvents(new ArrowShoot(this), this);
-		pm.registerEvents(new CustomArrowGround(this), this);
+		pm.registerEvents(new ArrowHitPlayer(), this);
+		pm.registerEvents(new ArrowShoot(), this);
+		pm.registerEvents(new CustomArrowGround(), this);
 
 		Arrays.asList(CustomArrows.values())
 				.forEach(customArrow -> customArrows.put(

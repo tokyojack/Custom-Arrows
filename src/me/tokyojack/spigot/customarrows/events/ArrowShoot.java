@@ -18,17 +18,16 @@ import me.tokyojack.spigot.customarrows.utils.CustomArrow;
 
 public class ArrowShoot implements Listener {
 
-	public ArrowShoot(Core core) {
-		// TODO Auto-generated constructor stub
-	}
-
-	@EventHandler
-	public void onArrowShoot(ProjectileLaunchEvent event) {
+	@EventHandler(ignoreCancelled = true)
+	public void onProjectileLaunch(ProjectileLaunchEvent event) {
+		
+		// Checks if projectile is an arrow, as snowballs, fieballs, etc. count as projectiles
 		if (!(event.getEntity() instanceof Arrow))
 			return;
 
 		Arrow arrow = (Arrow) event.getEntity();
 
+		// Checks if the shooter is a player (as dispensers can launch projectiles)
 		if (!(arrow.getShooter() instanceof Player))
 			return;
 
@@ -39,28 +38,31 @@ public class ArrowShoot implements Listener {
 		if (!(inventory.contains(Material.ARROW)))
 			return;
 
+		// Finds what slot the arrow shot from
 		int arrowSlot = isShotFromMainHand(player) ? inventory.first(Material.ARROW) : inventory.getHeldItemSlot();
-		ItemStack reference = inventory.getItem(arrowSlot);
+		ItemStack arrowItem = inventory.getItem(arrowSlot);
 
-		if ((reference == null) || (!reference.getType().equals(Material.ARROW))) {
+		if (arrowItem == null || !arrowItem.getType().equals(Material.ARROW)) {
 			arrowSlot = inventory.first(Material.ARROW);
-			reference = inventory.getItem(arrowSlot);
+			arrowItem = inventory.getItem(arrowSlot);
 		}
 
-		if (!reference.hasItemMeta())
+		if (!arrowItem.hasItemMeta())
 			return;
 
-		if (!reference.getItemMeta().hasDisplayName())
+		if (!arrowItem.getItemMeta().hasDisplayName())
 			return;
 
-		String displayName = ChatColor.stripColor(reference.getItemMeta().getDisplayName());
+		String displayName = ChatColor.stripColor(arrowItem.getItemMeta().getDisplayName());
 		Map<String, CustomArrow> customArrows = Core.getPlugin().getCustomArrows();
 
-		if (customArrows.containsKey(displayName)) {
+		// Checks if the arrow is an custom arrow
+		if (customArrows.containsKey(displayName)) 
+			// Gives the arrow shot the Metadata with the key "ca" and the value of the arrow's name
 			arrow.setMetadata("ca", new FixedMetadataValue(Core.getPlugin(),
 					ChatColor.stripColor(customArrows.get(displayName).getItem().getItemMeta().getDisplayName())));
 
-		}
+		
 
 	}
 

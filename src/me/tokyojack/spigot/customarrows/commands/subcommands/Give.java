@@ -25,6 +25,12 @@ public class Give extends SubKommand {
 		Map<String, CustomArrow> customArrows = Core.getPlugin().getCustomArrows();
 
 		if (args.length <= 0) {
+			
+			// Get's all the custom potions key's (name),
+			// Runs toString on them (just in case),
+			// Removes " Elixir" from the name, 
+			// Joins them together with ", " between,
+			// Removes "[" and "]" as it's a list
 			String customArrowList = Arrays.asList(customArrows.keySet()).stream().map(Object::toString)
 					.map(item -> item.replace(" Arrow", "")).collect(Collectors.joining(", ")).toString()
 					.replace("[", "").replace("]", "");
@@ -51,6 +57,7 @@ public class Give extends SubKommand {
 			}
 
 			targetPlayer.getInventory().addItem(customArrow);
+			return true;
 		}
 
 		if (commandSender instanceof Player) {
