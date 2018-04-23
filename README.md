@@ -1,4 +1,4 @@
-<h2  align="center">CustomArrows</h2>
+<h2  align="center">Custom-Arrows</h2>
 <p  align="center">A Bukkit plugin that adds custom arrows that apply different effects or abilities
 </p>
 
